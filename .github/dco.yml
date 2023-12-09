@@ -1,0 +1,4 @@
+# Read https://github.com/dcoapp/app for more information about the DCO specification.
+
+require:
+  members: false
