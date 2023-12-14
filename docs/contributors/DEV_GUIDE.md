@@ -12,7 +12,7 @@ This doc explains the development guide for the project when contributing to the
   * [Commit Sign-off](#commit-sign-off)
 - [Pull Request Guidelines](#pull-request-guidelines)
   * [Pull Request Message](#pull-request-message)
-  * [Pull Request Submit Process](#pull-request-submit-process)
+  * [Pull Request Process](#pull-request-process)
   * [Why was my pull request closed?](#why-was-my-pull-request-closed)
   * [Why is my pull request not getting reviewed?](#why-is-my-pull-request-not-getting-reviewed)
   * [Best Practices for Faster Reviews](#best-practices-for-faster-reviews)
@@ -48,7 +48,7 @@ The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL N
 1. Commits MUST be prefixed with a type, which consists of a noun, `feat`, `fix`, etc., followed by the OPTIONAL scope, OPTIONAL `!`, and REQUIRED terminal colon and space.
 2. The type `feat` MUST be used when a commit adds a new feature to your application or library.
 3. The type `fix` MUST be used when a commit represents a bug fix for your application.
-4. A scope MAY be provided after a type. A scope MUST consist of a noun describing a section of the codebase surrounded by parenthesis, e.g. `fix(parser):`
+4. A scope MAY be provided after a type. A scope MUST consist of a noun describing a section of the codebase surrounded by parenthesis, e.g. `fix(parser):`. 
 5. A description MUST immediately follow the colon and space after the type/scope prefix. The description is a short summary of the code changes, e.g. *fix: array parsing issue when multiple spaces were contained in string*.
 6. A longer commit body MAY be provided after the short description, providing additional contextual information about the code changes. The body MUST begin one blank line after the description.
 7. A commit body is free-form and MAY consist of any number of newline separated paragraphs.
@@ -128,7 +128,7 @@ The project uses [conventional commit](#conventional-commit-guidelines) specific
 The commit message should be structured as follows:
 
 ```
-<type>[optional scope]: <description>
+<type>: <description>
 
 [optional body]
 
@@ -144,7 +144,6 @@ The commit contains the following structural elements to communicate intent:
 5. `BREAKING CHANGE:` a commit that has a *footer* `BREAKING CHANGE:`, or appends a `!` after the *type/scope*, introduces a breaking API change (correlating with `MAJOR` in Semantic Versioning). A `BREAKING CHANGE` can be part of commits of any *type*.
 6. *types* other than `fix:` and `feat:` are allowed, and are defined in [semantic.yml](../../.github/semantic.yml), but will have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE).
 7. *footers* other than `BREAKING CHANGE:` may be provided and follow a convention similar to [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
-8. A **scope** may be provided to a commit’s *type*, to provide additional contextual information and is contained within parenthesis, e.g., `feat(parser): add ability to parse arrays`.
 
 ### Commit sign-off
 A [Developer Certificate of Origin](https://en.wikipedia.org/wiki/Developer_Certificate_of_Origin) is required for all commits. It can be provided using the [sign-off](https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---signoff) option for `git commit` or by GPG signing the commit. The developer certificate is available at (https://developercertificate.org/).
@@ -229,15 +228,15 @@ This doc explains the process and best practices for submitting a pull request f
 This project uses [conventional commits](#conventional-commit-guidelines) as its PR message format. These are particularly important as semantic releases are in use, and they use the PR message to determine the type of changes in the codebase. Following formalized conventions for PR messages the semantic release automatically determines the next [semantic version](https://semver.org) number and generates a changelog based on the conventional commit.
 
 #### Pull Request Title
-The pull request title should follow the below structured:
+The pull request title should contain a type, scope, description and follow the below structure:
 
 ```md
-<type>[optional scope]: <description>
+<type>(scope): <description>
 ```
 
 Example:
 ```md
-feat(parser): add ability to parse arrays (#123)
+feat(BCC): add the ability to parse arrays
 ```
 
 The pull request title contains the following structural elements to communicate intent:
@@ -247,82 +246,98 @@ The pull request title contains the following structural elements to communicate
 3. `feat:` a pull request of the *type* `feat` introduces a new feature to the codebase (this correlates with `MINOR` in Semantic Versioning).
 4. `BREAKING CHANGE` is a pull request that appends a `!` after the *type/scope*, and correlates with a `MAJOR` in Semantic Versioning. A `BREAKING CHANGE` can be part of any PR *type*.
 5. *types* other than `fix:` and `feat:` are allowed, such as `chore:`, `refactor:`, `test:` & `docs:` but will have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE).
-6. A **scope** may be provided to the pull request’s *type*, to provide additional contextual information and is contained within parenthesis, e.g., `feat(parser): add ability to parse arrays`.
+6. A *scope* may be provided to the pull request’s *type*, to provide additional contextual information and is contained within parenthesis, e.g., `feat(BCC):`. For the repository's *scope* options see the [semantic.yml](../../.github/semantic.yml) file.
 
-### Pull Request Submit Process
-Merging a pull request requires the following steps to be completed before the pull request will be merged automatically.
+### Pull Request Process
+The Pull Request process using GitHub's merge queue and CODEOWNERS involves several steps:
 
-- [Open a pull request][How2PR]
-- Pass all tests
-- Get all necessary approvals from reviewers and owners
+1. **Create a Pull Request**: After you've made changes to the codebase on your local machine, create a Pull Request and submit it against the main repository.
 
-#### Automated Pull Request Checks
-There are a number of automated checks that will run on your PR:
+2. **Automated Checks**: Once the PR is created, automated checks will run. These checks can include unit tests, integration tests, and code linters. The PR must pass all these checks before it can be merged. For more information on the automated checks see the [automated PR checks](#automated-pr-checks) section of this guide.
 
-- *Semantic Pull Request*
-    * validates that your commit messages meet the Conventional Commit format described above, additionally, your PR must also have a conventional message. The UX for this bot is a little odd as it doesn't go red if the messages are NOT correct, instead it goes yellow. You need it to go to a green tick!
+3. **Review by CODEOWNERS**: The CODEOWNERS file in the repository specifies the individuals or teams that are responsible for the code in the repository. These owners will be automatically requested for review when a PR is opened. The PR cannot be merged until it has been approved by the code owners.
+
+4. **Merge Queue**: If the PR has been approved and all checks have passed, it enters the merge queue. The merge queue ensures that PRs are merged in the order they were approved, and that the codebase's `main` branch is always in a deployable state. For more information on the merge queue see the [GitHub Merge Queue](#github-merge-queue) section of this guide.
+
+5. **Merge**: Once the PR reaches the front of the merge queue and there are no conflicts with the `main` branch, it will be automatically merged.
+
+#### Automated PR Checks
+The project uses automated checks to ensure that the codebase is in a stable state. These checks run automatically on every PR and are required to pass before it can be merged. The automated checks include:
+
+- *Semantic PRs*
+  * validates that your commit messages meet the Conventional Commit format described above, additionally, your PR must also have a conventional message. 
 - *DCO*
-    * see [Sign-off](./DEV_GUIDE.md#commit-sign-off)
-<!-- TODO: Optional 
+  * see [Sign-off](./DEV_GUIDE.md#commit-sign-off)
 - *Hound*
-    * lint the code and comments inline with any issues. You need this to go to a green tick and say, "No violations found. Woof!"
--->
+  * lint the code and comments inline with any issues. You need this to go to a green tick and say, "No violations found. Woof!"
 - *tekton*
-    * run the end-to-end tests in a new cluster using tekton. Check the logs for errors.
-- *tide*
-    * perform the merge when all the checks pass. Don't worry about the state of this one, it adds little info. Clicking on the details link is very helpful as it will take you to the dashboard where you can navigate to the "Tide" screen and check the status of your PR in the merge queue.
+  * run the end-to-end tests in a new cluster using tekton. Check the logs for errors.
+- *SonarCloud*
+  * run the static code analysis and check for any issues. You need this to go to a green tick and say, "No issues found. Great job!"
 
-#### Testing and Merge Workflow
-The merge workflow uses labels, applied by [commands][ChatOps] via comments. These will trigger actions on your pull request. Different ceProject repositories may require different labels on the path to approval. A generic explanation of how labels are used in pull requests can be found [here][Owners]. The pull request bot will also automatically apply and/or suggest labels.
+#### GitHub CODEOWNERS
+GitHub's CODEOWNERS feature is a mechanism to define individuals or teams that are responsible for code in a repository. It allows you to specify who must review changes to certain parts of your codebase. Here's how it works:
 
-*NOTE: For pull requests that are in progress but not ready for review, prefix the pull request title with `WIP` or `[WIP]` and track any remaining ToDos in a checklist in the pull request description.*
+1. **CODEOWNERS File**: You define your repository's code owners by creating a file named `CODEOWNERS` in the repository's root directory or in `.github` or `docs` directories. The `CODEOWNERS` file is a text file in which each line contains a file pattern followed by one or more owners.
 
-Here's the process the pull request goes through on its way from submission to merging:
+2. **File Patterns**: The file patterns in the `CODEOWNERS` file follow the same rules used in `.gitignore` files. The patterns are matched against the file paths in the git repository, from the root directory. You can specify a pattern for a specific file, or use wildcard characters to specify patterns for a set of files. For example, `*.js` would match all JavaScript files in the repository.
 
-1. Pull request submitted.
-2. `${GITHUB_BOT_NAME}` assigns reviewers
-3. If you're **not** a member of the Continuous Engineering Project organization, a Reviewer Member checks that the pull request is safe to test. If so, they comment `/ok-to-test`. Pull requests by organization members do not need this step. Now the pull request is considered to be trusted.
-4. The pre-submit tests will run:
+3. **Owners**: The owners can be specified using the GitHub username, team name, or email address. You can specify multiple owners for a pattern by separating them with a space or a comma.
 
-    1. Automatic tests run.
-    2. If tests fail, resolve issues by pushing edits to your pull request branch
-    3. If the failure is a flake, anyone on trusted pull requests can comment `/retest` to rerun failed tests
+4. **Order of Rules**: The last matching pattern in the `CODEOWNERS` file takes precedence if a file matches multiple patterns. For example, if a file named `index.js` matched a pattern `*.js` with owner `@js-owner` and another pattern `/frontend/*` with owner `@frontend-owner`, the latter would take precedence.
 
-5. Reviewer suggests edits
-6. Push edits to your pull request branch
-7. Repeat the prior two steps as needed until reviewer(s) add `/lgtm` label
-8. You squash commits at this step
-9. Follow the bot suggestions to assign an OWNER who will add the `/approve` label to the pull request
+5. **Automatic Review Requests**: When a pull request changes any files that match a pattern in the `CODEOWNERS` file, GitHub automatically requests a review from the owners when the pull request is opened.
 
-Once the tests pass, and the reviewer adds the `lgtm` and `approved` labels, the pull request enters the final merge pool. The merge pool is needed to make sure no incompatible changes have been introduced by other pull requests since the tests were last run on your pull request.
+6. **Protected Branches**: You can add further enforcement in protected branches. If you have protected your branch, you can set it to require a review from a code owner before you can merge a pull request in the branch.
 
-Tide will manage the merge pool automatically. It uses GitHub queries to select PRs into “tide pools”, runs as many in a batch as it can (“tide comes in”), and merges them (“tide goes out”).
+Here is a sample `CODEOWNERS` file:
 
-1. The pull request enters the merge pool if the merge criteria are met
-2. If tests fail, resolve issues by pushing edits to your pull request branch
-3. If the failure is a flake, anyone can comment `/retest` if the pull request is trusted
-4. If tests pass, Tide automatically merges the pull request
+```markdown
+# This is a comment.
+# Each line is a file pattern followed by one or more owners.
 
-That's the last step. Your pull request is now merged.
+# These owners will be the default owners for everything in the repo.
+*       @global-owner1 @global-owner2
 
-#### Marking Unfinished Pull Requests
-If you want to solicit reviews before the implementation of your pull request is complete, you should hold your pull request to ensure that Tide does not pick it up and attempt to merge it. There are two methods to achieve this:
+# Order is important; the last matching pattern takes the most precedence.
+# When someone opens a pull request that only modifies JS files, only @js-owner and not the global
+# owner(s) will be requested for a review.
+*.js    @js-owner
 
-1. You may add the `/hold` or `/hold cancel` comment commands
-2. You may add or remove a `WIP` or `[WIP]` prefix to your pull request title
+# You can also use email addresses if you prefer. They'll be used to look up users just like we do for commit author emails.
+/docs/* docs@example.com
 
-The GitHub robots will add and remove the `do-not-merge/hold` label as you use the comment commands and the `do-not-merge/work-in-progress` label as you edit your title. While either label is present, your pull request will not be considered for merging.
+# In this example, @doctocat owns any files in the build/logs directory at the root of the repository and any of its subdirectories.
+/build/logs/ @doctocat
+```
 
-#### Comment Commands Reference
-[The commands' doc][ChatOps] contains a reference for all comment commands.
+In this example:
 
+- `@global-owner1` and `@global-owner2` are the default owners for everything in the repository.
+- `@js-owner` is the owner for all JavaScript files.
+- `docs@example.com` is the owner for all files under the `/docs` directory.
+- `@doctocat` is the owner for all files under the `/build/logs` directory and its subdirectories.
 
-#### How the Tests Work
-The end-to-end tests will post the status results to the pull request. If an e2e test fails,
-`${GITHUB_BOT_NAME}` will comment on the pull request with the test history and the
-comment-command to re-run that test. E.g.
+For more detailed information, you can refer to the [about codeowners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners) article in GitHub Docs.
 
-> The following tests failed, say /retest to rerun them all.
+#### GitHub Merge Queue
+The GitHub's merge queue is a feature that helps maintain the stability of the `main` branch in a repository. It ensures that pull requests (PRs) are merged in the order they were approved, and that the `main` branch is always in a deployable state. Here's how it works:
+
+1. **PR Approval**: Once a PR has been reviewed and approved by the necessary parties (which can include code owners if a CODEOWNERS file is being used), it is eligible to enter the merge queue.
+
+2. **Entering the Merge Queue**: Approved PRs enter the merge queue. The order of the queue is typically determined by the time of approval, with the earliest-approved PRs at the front of the queue.
+
+3. **Automated Merging**: The merge queue automatically merges PRs one at a time. Before a PR is merged, the system checks for conflicts with the `main` branch.
+
+4. **Conflict Resolution**: If there are no conflicts, the PR is merged into the `main` branch. If there are conflicts, the PR is removed from the queue and the author is notified to resolve the conflicts.
+
+5. **Continuous Integration**: After a PR is merged, any continuous integration (CI) tests are run on the `main` branch. If these tests pass, the next PR in the queue is merged. If the tests fail, the `main` branch is considered broken and the queue is paused until the issue is resolved.
+
+6. **Queue Pausing**: If the `main` branch is broken (i.e., if CI tests fail), the merge queue is paused. No PRs will be merged until the `main` branch is fixed. This ensures that the `main` branch is always in a deployable state.
+
+The merge queue feature is particularly useful for projects with a high volume of contributions, as it helps streamline the process of integrating changes and reduces the likelihood of the `main` branch being in a broken state.
+
+For more detailed information, you can refer to the [merging a pull request with a merge queue](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/merging-a-pull-request-with-a-merge-queue) article in GitHub Docs.
 
 ### Why was my pull request closed?
 Pull requests older than 90 days will be closed. Exceptions can be made for pull requests that have active review comments, or that are awaiting other dependent pull requests. Closed pull requests are easy to recreate, and little work is lost by closing a pull request that subsequently needs to be reopened. We want to limit the total number of pull requests in flight to:
@@ -341,7 +356,7 @@ There is a detailed rundown of best practices, including how to avoid too-length
 
 But, if you've already followed the best practices, and you still aren't getting any pull request love, here are some things you can do to move the process along:
 
-* Make sure that your pull request has an assigned reviewer (assignee in GitHub). If not, reply to the pull request comment stream asking for a reviewer to be assigned. This is done via a [bot command][ChatOps] (the bot may have suggestions for this) and looks like this: `/assign @username`.
+* Make sure that your pull request has an assigned reviewer (assignee in GitHub). If not, reply to the pull request comment stream asking for a reviewer to be assigned.
 
 * Ping the assignee (@username) on the pull request comment stream, and ask for an estimate of when they can get to the review.
 
@@ -426,7 +441,7 @@ Make the fixes, and don't squash yet. Put them in a new commit, and re-push. Tha
 
 We might still ask you to clean up your commits at the very end for the sake of a more readable history, but don't do this until asked: typically at the point where the pull request would otherwise be tagged `LGTM`.
 
-Follow the [Commit message guidelines](#commit-message) for your commit title.
+Follow the [commit message guidelines](#commit-message) for your commit title.
 
 **General squashing guidelines:**
 
@@ -468,8 +483,7 @@ If you find one grammatical or spelling error, it is likely there are more in th
 ---
 
 
-[Owners]: OWNERS_SPEC.md#code-review-using-owners-files
 [How2PR]: https://help.github.com/articles/about-pull-requests/
 [Slack]: https://${SLACK_WORKSPACE}.slack.com
 [GitHubTeam]: https://github.com/orgs/${GITHUB_ORG}/teams
-[ChatOps]: https://jenkins-x.io/v3/develop/reference/chatops/
+[BOT]: https://github.com/${GITHUB_BOT_NAME}
