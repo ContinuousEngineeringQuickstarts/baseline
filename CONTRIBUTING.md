@@ -1,17 +1,20 @@
 # Contributing Guidelines
-<!-- TOC -->
-[Contributing Improvements](#contributing-improvements) | [Contributing Code](#contributing-code) | [Contributing Documentation](#contributing-documentation)
-<!-- /TOC -->
-
 Thank you for your interest in contributing to the project! By following this guideline, we hope to ensure that your contributions are made smoothly and efficiently.
 
+<!-- TOC -->
+1. [Suggesting Improvements](#suggesting-improvements)
+2. [Contributing Code](#contributing-code)
+3. [Contributing Documentation](#contributing-documentation)
+<!-- /TOC -->
 
-## Contributing Improvements
-<!-- TOC1 -->
-[Report a Problem](#report-a-problem) | [Suggest a Behaviour Change](#suggest-a-behaviour-change) | [Report a Vulnerability](#report-a-vulnerability)
-<!-- /TOC1 -->
-
+## Suggesting Improvements
 Great you wish to help improve the project either with an idea, problem, or documentation change you have come up with. To do this, you will need to raise a [new issue](https://github.com/${GITHUB_ORG}/${GITHUB_ISSUE_REPO}/issues/new/choose), and then select one of three issue types.
+
+<!-- TOC1 -->
+- [Report a Problem](#report-a-problem)
+- [Suggest a Behaviour Change](#suggest-a-behaviour-change)
+- [Report a Vulnerability](#report-a-vulnerability)
+<!-- /TOC1 -->
 
 ### Report a Problem
 If you discover a problem with the documentation or codebase, first check the [Issues Backlog][issues-backlog] to see if the issue has already been reported. Use the [Problem Report Template][problem-report] and provide detailed information about the problem, including steps to reproduce it.
@@ -26,11 +29,16 @@ If you identify a security concern, please use the [Report a security vulnerabil
 
 
 ## Contributing Code
-<!-- TOC2 -->
-[Code Pre-requisites](#code-prerequisites) | [Code Guide](#code-guide) | [Unit Tests](#unit-tests) | [Integration Tests](#integration-tests) | [Behaviour Tests](#behaviour-tests) | [Codebase Pull Request Review](#codebase-pull-request-review)
-<!-- /TOC2 -->
-
 Contributing to the codebase is as simple as selecting an issue from the [Issues Backlog][issues-backlog] and submit your changes through a pull request.
+
+<!-- TOC2 -->
+- [Code Pre-requisites](#code-prerequisites)
+- [Code Guide](#code-guide)
+- [Unit Tests](#unit-tests)
+- [Integration Tests](#integration-tests)
+- [Behaviour Tests](#behaviour-tests)
+- [Codebase Pull Request Guidelines](#codebase-pull-request)
+<!-- /TOC2 -->
 
 ### Code Prerequisites
 The following prerequisites are required to contribute to the codebase:
@@ -80,27 +88,28 @@ Run behaviour tests:
 
 ```
 
-### Codebase Pull Request Review
+### Codebase Pull Request
 When creating a pull request, consider reading the [Pull Request Guide][pr-guide] before submitting a pull request. For a pull request to be accepted, it must meet the following criteria:
 
 - Ensure PR message aligns with [Pull Request message guidelines](./docs/contributors/DEV_GUIDE.md#pull-request-message) for the project.
 - Your PR must be signed off. See the [Sign-off Guidelines](./docs/contributors/DEV_GUIDE.md#commit-sign-off) for more details.
-- Automated checks all pass. See the [Automated Pull Request Checks](./docs/contributors/DEV_GUIDE.md#automated-pull-request-checks) section for more information.
+- Automated checks all pass. See the [Automated Pull Request Checks](./docs/contributors/DEV_GUIDE.md#automated-pr-checks) section for more information.
 - Maintainers have successfully reviewed the pull request.
 
-The factory won't merge your changes until it has the tests passing against the *current* `HEAD` of `main` - but don't worry, whilst the tests *continue* to pass it will automatically merge your pull request into main and rerun the tests. As you can imagine, this can take a little while if the merge queue is long. Tide will also automatically attempt to batch up passing changes, but if the batch fails, it will resort to merging the pull requests one by one. Full details can be found in the [Pull Request Submit Process](./docs/contributors/DEV_GUIDE.md#pull-request-submit-process) guide.
-
-If the retest against `HEAD` of `main` fail, then it will notify you on the pull request, and you'll need to make some changes (and potentially get a new LGTM). See the [Testing and Merge Workflow](/docs/contributors/DEV_GUIDE.md#testing-and-merge-workflow) section for more information.
+The factory won't merge your changes until it has the tests passing against the *current* `HEAD` of `main` - but don't worry, whilst the tests *continue* to pass it will automatically merge your pull request into main and rerun the tests. As you can imagine, this can take a little while if the merge queue is long. 
+Full details can be found in the [Pull Request Submit Process](./docs/contributors/DEV_GUIDE.md#pull-request-process) guide.
 
 ---
 
 
 ## Contributing Documentation
-<!-- TOC3 -->
-[Documentation Pre-requisites](#documentation-prerequisites) | [Documentation Guide](#documentation-guide) | [Documentation Pull Request Review](#documentation-pull-request-review)
-<!-- /TOC3 -->
-
 Contributing to the codebase is as simple as selecting an issue from the [Issues Backlog][issues-backlog] and submit your changes through a pull request.
+
+<!-- TOC3 -->
+- [Documentation Pre-requisites](#documentation-prerequisites)
+- [Documentation Guide](#documentation-guide)
+- [Documentation Pull Request Guidelines](#documentation-pull-request)
+<!-- /TOC3 -->
 
 ### Documentation Prerequisites
 The following prerequisites are required to contribute to the documentation:
@@ -120,17 +129,16 @@ All documentation changes must be submitted through a pull request, see the [Pul
 8. **Images**: If the documentation includes images, ensure that they are clear, relevant, and include alt text for accessibility.  
 9. **Code Snippets**: If the documentation includes code snippets, ensure that they are correct and useful. Consider including a reference to a full example if possible.
 
-### Documentation Pull Request Review
+### Documentation Pull Request
 When creating a pull request, consider reading the [Pull Request Guide][pr-guide] before submitting a pull request. For a pull request to be accepted, it must meet the following criteria:
 
 - Ensure PR message aligns with [Pull Request message guidelines](./docs/contributors/DEV_GUIDE.md#pull-request-message) for the project.
 - Your PR must be signed off. See the [Sign-off Guidelines](./docs/contributors/DEV_GUIDE.md#commit-sign-off) for more details.
-- Automated checks all pass. See the [Automated Pull Request Checks](./docs/contributors/DEV_GUIDE.md#automated-pull-request-checks) section for more information.
+- Automated checks all pass. See the [Automated Pull Request Checks](./docs/contributors/DEV_GUIDE.md#automated-pr-checks) section for more information.
 - Maintainers have successfully reviewed the pull request.
 
-The factory won't merge your changes until it has the tests passing against the *current* `HEAD` of `main` - but don't worry, whilst the tests *continue* to pass it will automatically merge your pull request into main and rerun the tests. As you can imagine, this can take a little while if the merge queue is long. Tide will also automatically attempt to batch up passing changes, but if the batch fails, it will resort to merging the pull requests one by one. Full details can be found in the [Pull Request Submit Process](./docs/contributors/DEV_GUIDE.md#pull-request-submit-process) guide.
-
-If the retest against `HEAD` of `main` fail, then it will notify you on the pull request, and you'll need to make some changes (and potentially get a new LGTM). See the [Testing and Merge Workflow](/docs/contributors/DEV_GUIDE.md#testing-and-merge-workflow) section for more information.
+The factory won't merge your changes until it has the tests passing against the *current* `HEAD` of `main` - but don't worry, whilst the tests *continue* to pass it will automatically merge your pull request into main and rerun the tests. As you can imagine, this can take a little while if the merge queue is long.
+Full details can be found in the [Pull Request Submit Process](./docs/contributors/DEV_GUIDE.md#pull-request-process) guide.
 
 ---
 

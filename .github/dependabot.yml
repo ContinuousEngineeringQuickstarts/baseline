@@ -11,6 +11,7 @@ updates:
     schedule:
       interval: "daily"
     commit-message:
-      prefix: "dependabot"
+      prefix: "fix(dependabot)"
       include: "scope"
+
 

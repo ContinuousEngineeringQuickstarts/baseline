@@ -1,5 +1,5 @@
 # Security Policy
-The project takes security seriously, and make every possible effort to ensure users can adequately secure their automation infrastructure.
+The project takes security seriously, and makes every possible effort to ensure users can adequately secure their automation infrastructure.
 
 ## Reporting a Vulnerability
 <!-- TODO: check the link -->
