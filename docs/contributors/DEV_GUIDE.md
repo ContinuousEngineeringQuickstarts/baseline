@@ -142,7 +142,7 @@ The commit contains the following structural elements to communicate intent:
 3. `fix:` a commit of the *type* fix patches a bug in the codebase (this correlates with `PATCH` in Semantic Versioning).
 4. `feat:` a commit of the *type* `feat` introduces a new feature to the codebase (this correlates with `MINOR` in Semantic Versioning).
 5. `BREAKING CHANGE:` a commit that has a *footer* `BREAKING CHANGE:`, or appends a `!` after the *type/scope*, introduces a breaking API change (correlating with `MAJOR` in Semantic Versioning). A `BREAKING CHANGE` can be part of commits of any *type*.
-6. *types* other than `fix:` and `feat:` are allowed, and are defined in [semantic.yml](../../.github/semantic.yml), but will have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE).
+6. *types* other than `fix:` and `feat:` are allowed, and are defined in [semantic.yml](../../.github/semantic.yml), but will have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE). For the repository's *types* options, see the [semantic.yml](../../.github/semantic.yml) file.
 7. *footers* other than `BREAKING CHANGE:` may be provided and follow a convention similar to [git trailer format](https://git-scm.com/docs/git-interpret-trailers).
 
 ### Commit sign-off
@@ -245,8 +245,8 @@ The pull request title contains the following structural elements to communicate
 2. `fix:` a pull request of the *type* fix patches a bug in the codebase (this correlates with `PATCH` in Semantic Versioning).
 3. `feat:` a pull request of the *type* `feat` introduces a new feature to the codebase (this correlates with `MINOR` in Semantic Versioning).
 4. `BREAKING CHANGE` is a pull request that appends a `!` after the *type/scope*, and correlates with a `MAJOR` in Semantic Versioning. A `BREAKING CHANGE` can be part of any PR *type*.
-5. *types* other than `fix:` and `feat:` are allowed, such as `chore:`, `refactor:`, `test:` & `docs:` but will have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE).
-6. A *scope* may be provided to the pull request’s *type*, to provide additional contextual information and is contained within parenthesis, e.g., `feat(BCC):`. For the repository's *scope* options see the [semantic.yml](../../.github/semantic.yml) file.
+5. *types* other than `fix:` and `feat:` are allowed, such as `chore:`, `refactor:`, `test:` & `docs:` but will have no implicit effect in Semantic Versioning (unless they include a BREAKING CHANGE). For the repository's *types* options, see the [semantic.yml](../../.github/semantic.yml) file.
+6. A *scope* may be provided to the pull request’s *type*, to provide additional contextual information and is contained within parenthesis, e.g., `feat(BCC):`. For the repository's *scope* options, see the [semantic.yml](../../.github/semantic.yml) file.
 
 ### Pull Request Process
 The Pull Request process using GitHub's merge queue and CODEOWNERS involves several steps:
