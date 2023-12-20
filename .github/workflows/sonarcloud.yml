@@ -51,8 +51,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}   # Generate a token on Sonarcloud.io, add it to the secrets of this repo with the name SONAR_TOKEN (Settings > Secrets > Actions > add new repository secret)
-          SONAR_ORGANISATION: ${{ variables.SONAR_ORGANISATION }}
-          SONAR_PROJECT_KEY: ${{ variables.SONAR_PROJECT_KEY }}
+
         with:
           # Additional arguments for the sonarcloud scanner
           args:
