@@ -1,12 +1,17 @@
 #!/bin/bash
-# shellcheck disable=SC2034
 
 # This script is used to replace placeholders in certain files with the actual values of the corresponding variables.
-# The placeholders are in the format ${VARIABLE_NAME} and the actual values are stored in the corresponding shell variables.
+# The placeholders are in the format ${VARIABLE_NAME} and the actual values are stored in the corresponding environment variables.
+# This script should be executed from the main `Makefile` using the environment variables defined there.
 
 # Define an array of files that contain the placeholders to be replaced.
 # The paths to the files are relative to the root of the project.
-FILES=("./README.md" "./SECURITY.md" "./CONTRIBUTING.md" "./.github/pull_request_template.md" "./.github/workflows/sonarcloud.yml" "./docs/contributors/DEV_GUIDE.md")
+FILES=("./README.md" "./SECURITY.md" "./CONTRIBUTING.md" "./.github/pull_request_template.md" "./.github/CODEOWNERS" "./.github/workflows/sonarcloud.yml" "./docs/contributors/DEV_GUIDE.md")
+
+# Replace the template sonarcloud.yml file with the project specific sonarcloud.yml file.
+rm ./.github/workflows/sonarcloud.yml
+mv ./.github/workflows/.sonarcloud.yml ./.github/workflows/sonarcloud.yml
+echo "Switched from template to project sonarcloud.yml"
 
 # Iterate over each file in the array
 for FILE in "${FILES[@]}"; do
@@ -21,6 +26,8 @@ for FILE in "${FILES[@]}"; do
     sed -i -e "s/\${GITHUB_ISSUE_REPO}/$GITHUB_ISSUE_REPO/g" "$FILE"
     sed -i -e "s/\${GITHUB_CODEOWNERS}/$GITHUB_CODEOWNERS/g" "$FILE"
     sed -i -e "s/\${SONAR_PROJECT_KEY}/$SONAR_PROJECT_KEY/g" "$FILE"
-    sed -i -e "s/\${SONAR_ORGANIZATION}/$SONAR_ORGANIZATION/g" "$FILE"
+    sed -i -e "s/\${SONAR_ORGANISATION}/$SONAR_ORGANISATION/g" "$FILE"
     sed -i -e "s/\${SLACK_WORKSPACE}/$SLACK_WORKSPACE/g" "$FILE"
+    echo "Updated $FILE"
+    rm "$FILE-e"
 done
