@@ -8,10 +8,13 @@
 # The paths to the files are relative to the root of the project.
 FILES=("./README.md" "./SECURITY.md" "./CONTRIBUTING.md" "./.github/pull_request_template.md" "./.github/CODEOWNERS" "./.github/workflows/sonarcloud.yml" "./docs/contributors/DEV_GUIDE.md")
 
-# Replace the template sonarcloud.yml file with the project specific sonarcloud.yml file.
+# Replace the template sonarcloud.yml & CODEOWNERS file with the project specific files.
 rm ./.github/workflows/sonarcloud.yml
 mv ./.github/workflows/.sonarcloud.yml.tmp ./.github/workflows/sonarcloud.yml
-echo "Switched from template to project sonarcloud.yml"
+rm ./.github/CODEOWNERS
+mv ./.github/.CODEOWNERS.tmp ./.github/CODEOWNERS
+echo "Switched from template to project sonarcloud.yml & CODEOWNERS"
+
 
 # Iterate over each file in the array
 for FILE in "${FILES[@]}"; do
