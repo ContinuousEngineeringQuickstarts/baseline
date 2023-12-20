@@ -14,8 +14,10 @@ labels: problem
 
 
 ### BCR pull requests
-Link the relevant BCD, BCG and BCC pull requests to this issue.
+The associated pull requests that describe and implement the behaviour change.
 
-- [ ] Behaviour Change Documentation (BCD) linked
-- [ ] Behaviour Change Gherkin (BCG) linked
-- [ ] Behaviour Change Code (BCC) linked
+**Behaviour Change Documentation (BCD)**: <!-- TODO: Add the link to the BCD pull request -->
+
+**Behaviour Change Gherkin (BCG)**: <!-- TODO: Add the link to the BCG pull request -->
+
+**Behaviour Change Code (BCC)**: <!-- TODO: Add the link to the BCC pull request -->
