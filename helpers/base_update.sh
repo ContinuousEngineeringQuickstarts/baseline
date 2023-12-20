@@ -10,7 +10,7 @@ FILES=("./README.md" "./SECURITY.md" "./CONTRIBUTING.md" "./.github/pull_request
 
 # Replace the template sonarcloud.yml file with the project specific sonarcloud.yml file.
 rm ./.github/workflows/sonarcloud.yml
-mv ./.github/workflows/.sonarcloud.yml ./.github/workflows/sonarcloud.yml
+mv ./.github/workflows/.sonarcloud.yml.tmp ./.github/workflows/sonarcloud.yml
 echo "Switched from template to project sonarcloud.yml"
 
 # Iterate over each file in the array
