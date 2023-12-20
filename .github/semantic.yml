@@ -1,0 +1,15 @@
+# Read https://github.com/Ezard/semantic-prs/blob/master/README.md#configuration for more information on the available configuration options.
+
+types:
+  - feat
+  - fix
+  - test
+  - docs
+  - refactor
+  - chore
+  - dependabot
+
+scopes:
+  - BCD
+  - BCG
+  - BCC
