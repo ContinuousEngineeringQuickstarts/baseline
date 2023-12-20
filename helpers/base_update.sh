@@ -13,6 +13,8 @@ rm ./.github/workflows/sonarcloud.yml
 mv ./.github/workflows/.sonarcloud.yml.tmp ./.github/workflows/sonarcloud.yml
 rm ./.github/CODEOWNERS
 mv ./.github/.CODEOWNERS.tmp ./.github/CODEOWNERS
+rm ./.github/pull_request_template.md
+mv ./.github/pull_request_template.md.tmp ./.github/pull_request_template.md
 echo "Switched from template to project sonarcloud.yml & CODEOWNERS"
 
 
