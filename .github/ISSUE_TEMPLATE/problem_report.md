@@ -16,8 +16,8 @@ labels: problem
 ### BCR pull requests
 The associated pull requests that describe and implement the behaviour change.
 
-**Behaviour Change Documentation (BCD)**: <!-- TODO: Add the link to the BCD pull request -->
+**Behaviour Change Request (BCR)**: <!-- TODO: Add the link to the BCR pull request -->
 
-**Behaviour Change Gherkin (BCG)**: <!-- TODO: Add the link to the BCG pull request -->
+**Behaviour Change Diagnostics (BCD)**: <!-- TODO: Add the link to the BCD pull request -->
 
 **Behaviour Change Code (BCC)**: <!-- TODO: Add the link to the BCC pull request -->

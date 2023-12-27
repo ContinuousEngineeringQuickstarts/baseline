@@ -13,6 +13,6 @@ types:
   - dependabot
 
 scopes:
+  - BCR
   - BCD
-  - BCG
   - BCC
