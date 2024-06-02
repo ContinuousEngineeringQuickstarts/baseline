@@ -264,16 +264,9 @@ The Pull Request process using GitHub's merge queue and CODEOWNERS involves seve
 #### Automated PR Checks
 The project uses automated checks to ensure that the codebase is in a stable state. These checks run automatically on every PR and are required to pass before it can be merged. The automated checks include:
 
-- *Semantic PRs*
-  * validates that your commit messages meet the Conventional Commit format described above, additionally, your PR must also have a conventional message. 
-- *DCO*
-  * see [Sign-off](./DEV_GUIDE.md#commit-sign-off)
-- *Hound*
-  * lint the code and comments inline with any issues. You need this to go to a green tick and say, "No violations found. Woof!"
-- *tekton*
-  * run the end-to-end tests in a new cluster using tekton. Check the logs for errors.
-- *SonarCloud*
-  * run the static code analysis and check for any issues. You need this to go to a green tick and say, "No issues found. Great job!"
+- **tekton**: run the end-to-end tests in a new cluster using tekton. Check the logs for errors.
+- **GitHub Actions**: run specific checks on the PR, more info can be found in the [GitHub Actions Workflows](../../.github/workflows/README.md#github-actions-workflows) section. Check the logs for errors.
+    
 
 #### GitHub CODEOWNERS
 GitHub's CODEOWNERS feature is a mechanism to define individuals or teams that are responsible for code in a repository. It allows you to specify who must review changes to certain parts of your codebase. Here's how it works:

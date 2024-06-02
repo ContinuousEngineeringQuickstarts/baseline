@@ -3,3 +3,4 @@
 ### How was the change implemented?
 <!-- Describe the implementation of the change -->
 
+factory-diagnostics
